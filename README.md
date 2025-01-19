@@ -2,6 +2,8 @@
 
 Este es un juego de ahorcado implementado en HTML, CSS y JavaScript. Esta aplicacion consume los servicios de la api de palabras aleatorias. (https://random-word-api.herokuapp.com/)
 
+![alt text](https://raw.githubusercontent.com/allydevper/hangman-game/refs/heads/main/demo.png)
+
 ## Características
 
 - **Interfaz de Usuario:**
