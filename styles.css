@@ -1,0 +1,44 @@
+body {
+    background-color: #1DB954;
+    color: #191414;
+    font-family: "Comfortaa", serif;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.incorrect-letters-background {
+    font-weight: bold;
+    padding: 10px;
+    background-color: white;
+}
+
+.message-background {
+    font-weight: bold;
+    padding: 10px;
+    background-color: black;
+}
+
+.key {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.marked-key {
+    background-color: black;
+    color: white;
+}
+
+.floating-combo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
