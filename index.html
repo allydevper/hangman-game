@@ -101,18 +101,35 @@
         const keys = document.querySelectorAll('.key');
 
         window.onload = function (event) {
+            nextLevel(0);
+        };
+
+        function reloadLevel(){
+            nextLevel(0);
+        }
+
+        function nextLevel(value = 1) {
+            guessedLetters = [];
+            incorrectLetters = [];
+            level = level + value;
+            attempts = 6;
+            gameOver = false;
+            gameFailed = false;
+            gameSuccess = false;
             disableKeys();
             fetchWord();
-        };
+            document.getElementById('next-level').setAttribute('disabled', 'disabled');
+        }
 
         async function fetchWord() {
             try {
-                const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${5 + level}&lang=es`);
+                const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${4 + level}&lang=es`);
                 const data = await response.json();
                 word = normalize(data[0].toUpperCase());
-                console.log(word);
                 displayWord();
                 enableKeys();
+                document.getElementById('message').textContent = '';
+                document.getElementById('message').classList.remove('message-background');
 
             } catch (error) {
                 console.error('Error fetching word:', error);
@@ -143,6 +160,7 @@
                 gameOver = true;
                 gameSuccess = true;
                 disableKeys();
+                document.getElementById('next-level').removeAttribute('disabled');
             } else if (attempts <= 0) {
                 document.getElementById('message').textContent = 'Lo siento, has perdido. La palabra era: ' + word;
                 document.getElementById('message').classList.add('message-background');
@@ -166,21 +184,9 @@
             });
         }
 
-        function nextLevel() {
-            guessedLetters = [];
-            incorrectLetters = [];
-            level = level + 1;
-            attempts = 6;
-            gameOver = false;
-            gameFailed = false;
-            gameSuccess = false;
-            fetchWord();
-        }
-
         keys.forEach(key => {
             key.addEventListener('click', () => {
                 const guess = key.getAttribute('data-key');
-                debugger
                 if (guess && !guessedLetters.includes(guess) && !incorrectLetters.includes(guess) && !gameOver) {
                     if (word.includes(guess)) {
                         guessedLetters.push(guess);
