@@ -82,14 +82,21 @@
             <button class="key btn btn-light" data-key="N">N</button>
             <button class="key btn btn-light" data-key="M">M</button>
         </div>
+        <div class="text-center mt-4">
+            <button id="reload-level" class="btn btn-primary" onclick="reloadLevel();">Reiniciar nivel</button>
+            <button id="next-level" class="btn btn-dark" onclick="nextLevel();">Siguiente nivel</button>
+        </div>
     </div>
 
     <script>
         let word = '';
+        let level = 1;
         let attempts = 6;
         let guessedLetters = [];
         let incorrectLetters = [];
-        let gameEnded = false;
+        let gameOver = false;
+        let gameFailed = false;
+        let gameSuccess = false;
 
         const keys = document.querySelectorAll('.key');
 
@@ -100,9 +107,9 @@
 
         async function fetchWord() {
             try {
-                const response = await fetch('https://random-word-api.herokuapp.com/word?length=5&lang=es');
+                const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${5 + level}&lang=es`);
                 const data = await response.json();
-                word = data[0].toUpperCase();
+                word = normalize(data[0].toUpperCase());
                 console.log(word);
                 displayWord();
                 enableKeys();
@@ -133,14 +140,16 @@
                 document.getElementById('message').classList.add('message-background');
                 document.getElementById('incorrect-letters').textContent = '';
                 document.getElementById('incorrect-letters').classList.remove('incorrect-letters-background');
-                gameEnded = true;
+                gameOver = true;
+                gameSuccess = true;
                 disableKeys();
             } else if (attempts <= 0) {
                 document.getElementById('message').textContent = 'Lo siento, has perdido. La palabra era: ' + word;
                 document.getElementById('message').classList.add('message-background');
                 document.getElementById('incorrect-letters').textContent = '';
                 document.getElementById('incorrect-letters').classList.remove('incorrect-letters-background');
-                gameEnded = true;
+                gameOver = true;
+                gameFailed = true;
                 disableKeys();
             }
         }
@@ -157,11 +166,22 @@
             });
         }
 
+        function nextLevel() {
+            guessedLetters = [];
+            incorrectLetters = [];
+            level = level + 1;
+            attempts = 6;
+            gameOver = false;
+            gameFailed = false;
+            gameSuccess = false;
+            fetchWord();
+        }
+
         keys.forEach(key => {
             key.addEventListener('click', () => {
                 const guess = key.getAttribute('data-key');
                 debugger
-                if (guess && !guessedLetters.includes(guess) && !incorrectLetters.includes(guess) && !gameEnded) {
+                if (guess && !guessedLetters.includes(guess) && !incorrectLetters.includes(guess) && !gameOver) {
                     if (word.includes(guess)) {
                         guessedLetters.push(guess);
                     } else {
@@ -174,6 +194,10 @@
                 }
             });
         });
+
+        function normalize(word) {
+            return word.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+        }
 
     </script>
 </body>
