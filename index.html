@@ -42,6 +42,11 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+        .marked-key {
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 
@@ -104,7 +109,7 @@
             nextLevel(0);
         };
 
-        function reloadLevel(){
+        function reloadLevel() {
             nextLevel(0);
         }
 
@@ -175,12 +180,14 @@
         function disableKeys() {
             keys.forEach(key => {
                 key.setAttribute('disabled', 'disabled');
+                key.classList.remove('marked-key');
             });
         }
 
         function enableKeys() {
             keys.forEach(key => {
                 key.removeAttribute('disabled');
+                key.classList.remove('marked-key');
             });
         }
 
@@ -197,6 +204,7 @@
                     displayWord();
                     updateIncorrectLetters();
                     checkGameStatus();
+                    key.classList.add('marked-key');
                 }
             });
         });
