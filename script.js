@@ -80,7 +80,6 @@ function updateTexts() {
 document.getElementById('language-select').addEventListener('change', updateLanguage);
 
 function updateLanguage() {
-    debugger
     selectedLanguage = document.getElementById('language-select').value;
 
     nextLevel(0);
@@ -106,6 +105,7 @@ function nextLevel(value = 1) {
     disableKeys();
     fetchWord();
     updateTexts();
+    resetImage();
     document.getElementById('next-level').setAttribute('disabled', 'disabled');
 }
 
@@ -159,6 +159,7 @@ function checkGameStatus() {
         gameFailed = true;
         disableKeys();
     }
+    document.getElementById('attempts').innerHTML = `${translation.remainingAttempts}: ${attempts}`;
 }
 
 function disableKeys() {
@@ -184,6 +185,7 @@ keys.forEach(key => {
             } else {
                 incorrectLetters.push(guess);
                 attempts--;
+                showNextPart();
             }
             displayWord();
             checkGameStatus();
@@ -191,6 +193,23 @@ keys.forEach(key => {
         }
     });
 });
+
+const parts = ["head", "body", "arm1", "arm2", "leg1", "leg2"];
+let currentStep = 0;
+
+function showNextPart() {
+    if (currentStep < parts.length) {
+        document.getElementById(parts[currentStep]).classList.remove("d-none");
+        currentStep++;
+    }
+}
+
+function resetImage() {
+    parts.forEach(part => {
+        document.getElementById(part).classList.add("d-none");
+    });
+    currentStep = 0;
+}
 
 function normalize(word) {
     return word.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
