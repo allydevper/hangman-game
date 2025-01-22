@@ -8,7 +8,7 @@ Este es un juego de ahorcado implementado en HTML, CSS y JavaScript. Esta aplica
 
 - **Interfaz de Usuario:**
   - Utiliza Bootstrap para un diseño responsivo y moderno.
-  - Incluye un selector de idioma para cambiar entre Español, Inglés, Alemán, Italiano y Francés.
+  - Incluye un selector de idioma para cambiar entre Español, Inglés, Alemán, Italiano y Francés la cual son opciones brindadas por el api.
 
 - **Elementos del Juego:**
   - Visualización del progreso del ahorcado con imágenes.
