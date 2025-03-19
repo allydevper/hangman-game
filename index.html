@@ -12,6 +12,106 @@
         href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Fredoka:wght@300..700&family=Signika:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .floating-combo {
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        #game-title {
+            font-size: 2.5rem;
+        }
+
+        #hangman-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #hangman-image div {
+            max-width: 250px;
+            height: auto;
+        }
+
+        #word {
+            word-spacing: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        #attempts {
+            font-size: 1.25rem;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .keyboard .key {
+            flex: 0 0 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        .text-center button {
+            margin: 5px;
+        }
+
+        @media (max-width: 768px) {
+            #game-title {
+                font-size: 2rem;
+            }
+
+            #word {
+                font-size: 1.25rem;
+            }
+
+            #attempts {
+                font-size: 1rem;
+            }
+
+            #hangman-image div {
+                max-width: 200px;
+            }
+
+            .keyboard .key {
+                flex: 0 0 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #game-title {
+                font-size: 1.75rem;
+            }
+
+            #word {
+                font-size: 1rem;
+            }
+
+            #attempts {
+                font-size: 0.9rem;
+            }
+
+            .keyboard .key {
+                flex: 0 0 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+
+            .floating-combo {
+                max-width: 90%;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +131,7 @@
                 1</span></h1>
         <div id="word" class="my-4 fs-3">_ _ _ _ _</div>
         <div id="hangman-image" class="mb-3">
-            <div style="position: relative;width: 150px;height: 150px;margin: 0 auto;">
+            <div style="position: relative; margin: 0 auto;">
                 <img src="./images/base.png" alt="Base" id="base" class="position-absolute start-0">
                 <img src="./images/head.png" alt="Cabeza" id="head" class="d-none position-absolute start-0">
                 <img src="./images/body.png" alt="Cuerpo" id="body" class="d-none position-absolute start-0">
