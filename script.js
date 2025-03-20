@@ -70,7 +70,7 @@ const translations = {
 
 function updateTexts() {
     const translation = translations[selectedLanguage];
-    document.getElementById('game-title').innerHTML = `${translation.gameTitle} <span id="level-badge" class="position-absolute badge rounded-pill bg-danger fs-6">${translation.level} ${level}</span>`;
+    document.getElementById('game-title').innerHTML = `${translation.gameTitle} <span id="level-badge" class="position-absolute badge rounded-pill bg-danger fs-6" style="font-size: 0.7rem !important;">${translation.level} ${level}</span>`;
     document.getElementById('attempts').innerHTML = `${translation.remainingAttempts}: ${attempts}`;
     document.getElementById('reload-level').innerHTML = `${translation.reloadLevel}`;
     document.getElementById('next-level').innerHTML = `${translation.nextLevel}`;

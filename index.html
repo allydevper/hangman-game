@@ -13,19 +13,9 @@
         rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            overflow-x: hidden;
-            font-family: 'Comfortaa', sans-serif;
-        }
-
         .floating-combo {
             max-width: 300px;
-            margin: 20px auto;
-        }
-
-        #game-title {
-            font-size: 2.5rem;
+            margin: 0 auto;
         }
 
         #hangman-image {
@@ -34,39 +24,18 @@
         }
 
         #hangman-image div {
-            max-width: 250px;
+            max-width: 200px;
             height: auto;
         }
 
         #word {
             word-spacing: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        #attempts {
-            font-size: 1.25rem;
-        }
-
-        .keyboard {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .keyboard .key {
-            flex: 0 0 40px;
-            height: 40px;
-            font-size: 1rem;
-        }
-
-        .text-center button {
-            margin: 5px;
         }
 
         @media (max-width: 768px) {
             #game-title {
-                font-size: 2rem;
+                margin-top: 50px;
+                font-size: 1.5rem;
             }
 
             #word {
@@ -77,39 +46,64 @@
                 font-size: 1rem;
             }
 
-            #hangman-image div {
-                max-width: 200px;
-            }
-
-            .keyboard .key {
-                flex: 0 0 35px;
-                height: 35px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #game-title {
-                font-size: 1.75rem;
-            }
-
-            #word {
-                font-size: 1rem;
-            }
-
-            #attempts {
-                font-size: 0.9rem;
-            }
-
-            .keyboard .key {
-                flex: 0 0 30px;
-                height: 30px;
-                font-size: 0.8rem;
+            .keyboard {
+                overflow-x: auto;
+                white-space: nowrap;
             }
 
             .floating-combo {
-                max-width: 90%;
+                position: absolute;
+                z-index: 1000;
             }
+        }
+
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+            flex: 1;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .key {
+            flex: 1 0 calc(10% - 0.5rem);
+            max-width: 50px;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .keyboard {
+                max-width: 100%;
+            }
+
+            .key {
+                flex: 1 0 calc(20% - 0.5rem);
+                max-width: 40px;
+                font-size: 0.8rem;
+            }
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            padding: 1rem;
+            text-align: center;
         }
     </style>
 </head>
@@ -127,11 +121,11 @@
     </div>
     <div class="container text-center mt-5">
         <h1 class="text-white" id="game-title">Juego de Ahorcado <span id="level-badge"
-                class="position-absolute badge rounded-pill bg-danger fs-6">Nivel
+                class="position-absolute badge rounded-pill bg-danger fs-6" style="font-size: 0.7rem !important;">Nivel
                 1</span></h1>
         <div id="word" class="my-4 fs-3">_ _ _ _ _</div>
         <div id="hangman-image" class="mb-3">
-            <div style="position: relative; margin: 0 auto;">
+            <div style="position: relative; margin: 0 auto; height: 150px;">
                 <img src="./images/base.png" alt="Base" id="base" class="position-absolute start-0">
                 <img src="./images/head.png" alt="Cabeza" id="head" class="d-none position-absolute start-0">
                 <img src="./images/body.png" alt="Cuerpo" id="body" class="d-none position-absolute start-0">
@@ -166,8 +160,6 @@
             <button class="key btn btn-light" data-key="K">K</button>
             <button class="key btn btn-light" data-key="L">L</button>
             <button class="key btn btn-light" data-key="Z">Z</button>
-            <span></span>
-            <span></span>
             <button class="key btn btn-light" data-key="X">X</button>
             <button class="key btn btn-light" data-key="C">C</button>
             <button class="key btn btn-light" data-key="V">V</button>
@@ -182,6 +174,11 @@
     </div>
 
     <script src="script.js"></script>
+    <footer class="mt-5">
+        <div class="max-w-7xl mx-auto mt-2">
+            <p class="text-sm tracking-wider">by <a href="https://github.com/allydevper" target="_blank" class="text-white">allydevper</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>
