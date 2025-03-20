@@ -111,9 +111,21 @@ function nextLevel(value = 1) {
 
 async function fetchWord() {
     try {
-        const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${4 + level}&lang=${selectedLanguage}`);
-        const data = await response.json();
-        word = normalize(data[0].toUpperCase());
+        debugger
+        const response = await fetch(`./data/${selectedLanguage}.json`).json();
+        console.log(response)
+        const filtrados = response.filter(str => str.length === (4 + level));
+
+        if (filtrados.length > 0) {
+            const indiceAleatorio = Math.floor(Math.random() * filtrados.length);
+            const stringRandom = filtrados[indiceAleatorio];
+            word = normalize(stringRandom);
+        } else {
+            const indiceAleatorio = Math.floor(Math.random() * response.length);
+            const stringRandom = filtrados[indiceAleatorio];
+            word = normalize(stringRandom);
+        }
+
         displayWord();
         enableKeys();
         document.getElementById('message').textContent = '';
