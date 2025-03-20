@@ -112,16 +112,16 @@ function nextLevel(value = 1) {
 async function fetchWord() {
     try {
         debugger
-        const response = await fetch(`./data/${selectedLanguage}.json`).json();
-        console.log(response)
-        const filtrados = response.filter(str => str.length === (4 + level));
+        const response = await fetch(`./data/${selectedLanguage}.json`);
+        const data = await response.json();
+        const filtrados = data.filter(str => str.length === (4 + level));
 
         if (filtrados.length > 0) {
             const indiceAleatorio = Math.floor(Math.random() * filtrados.length);
             const stringRandom = filtrados[indiceAleatorio];
             word = normalize(stringRandom);
         } else {
-            const indiceAleatorio = Math.floor(Math.random() * response.length);
+            const indiceAleatorio = Math.floor(Math.random() * data.length);
             const stringRandom = filtrados[indiceAleatorio];
             word = normalize(stringRandom);
         }
